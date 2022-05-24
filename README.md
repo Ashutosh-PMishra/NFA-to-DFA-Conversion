@@ -1,7 +1,7 @@
 # NFA-to-DFA-Conversion
 This repository consist of FAFL and CDSS project.
 
-[View Demo](file:///E:/SEE_6th_SEM/Assignment/CDSS%20Project/NFA-to-DFA-Converter-main/index.html)
+[View Demo](http://127.0.0.1:5500/index.html)
 
 # ABSTRACT
 This is the Project for the Automata Theory/Formal Languages term project. The goal was to develop an algorithm that converts a Non-deterministic Finite Automata (NFA) to a Deterministic Finite Automata (DFA). This project describes the design process, implementation, and visualization of the algorithm developed.
