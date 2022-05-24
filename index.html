@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NFA to DFA</title>
+
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+
+    <!-- CSS -->
+    <link href="NFAtoDFA.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand">NFA to DFA Converter</a>
+
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" href="#"
+            >Home <span class="sr-only">(current)</span></a
+          >
+          <a class="nav-link" href="#">Team</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <br />
+      <div id="dsulogo">
+        <!-- <img src="dsuLogo.png" alt="Dsu Logo Image"> -->
+      </div>
+      <h1>CDSS Project</h1>
+      <h2>Input the NFA</h2>
+      <p class="instructions">
+        Enter the non-deterministic automata (NFA) transitions here, then define
+        the final states and initial state.
+        
+      </p>
+      <ul class="instructions-list">
+        <li>
+          The left-hand current state of each transition must be filled in.
+        </li>
+        <li>
+          [ &lambda; ] - An empty text field corresponds to lambda (or epsilon).
+        </li>
+        <li>
+          The finite set of states ( <i>Q</i> ) and the alphabet ( &Sigma; )
+          will be generated automatically based on the transitions entered.
+        </li>
+        <li>Inputs are case-sensitive and whitespace is not ignored.</li>
+        <li>All entries should be delimited by a comma, if permitted.</li>
+      </ul>
+      <div class="main-part">
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          id="resetBtn"
+          title="Reset the current NFA"
+        >
+          Reset
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-success"
+          id="exampleBtn"
+          title="Fill in an example NFA"
+        >
+          Example
+        </button>
+        <form class="form-horizontal align-center" id="nfa" role="form">
+          <form class="form-horizontal">
+            <div class="form-group form-inline">
+              <label for="initialStateInput">Initial State:&nbsp;&nbsp;</label>
+              <input type="text" class="form-control" id="initialStateInput" />
+            </div>
+
+            <div class="form-group form-inline">
+              <label for="finalStatesInput">Final States:&nbsp;&nbsp;</label>
+              <input type="text" class="form-control" id="finalStatesInput" />
+            </div>
+          </form>
+          <div class="form-inline" id="nfa-transitions">
+            <div class="production-row">
+              &delta;(&nbsp;<input
+                type="text"
+                class="form-control current-state-input"
+              />&nbsp;,&nbsp;<input
+                type="text"
+                class="form-control input-symbol"
+                placeholder="&lambda;"
+              />&nbsp;)&nbsp;=&nbsp;<input
+                type="text"
+                class="form-control next-states"
+              />
+              <span
+                class="glyphicon glyphicon-remove-circle remove-button"
+                title="Remove this transition"
+              ></span>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </form>
+        <div class="clearfix"></div>
+        <br />
+
+        <div class="col-xs-6 new-production">
+          <button
+            id="new-transition"
+            type="button"
+            class="btn btn-outline-dark"
+            title="Create a new transition"
+          >
+            <span class="glyphicon glyphicon-plus"></span> &nbsp;Click here or
+            press &quot;Enter&quot; for a new transition
+          </button>
+        </div>
+      </div>
+      <br />
+      <br />
+
+      <div class="clearfix"></div>
+      <h1 id="verify-update-debug">Verify</h1>
+
+      <p>This is the NFA you have input above:</p>
+      <span id="current-nfa-status"></span>
+      <div id="current-nfa"></div>
+
+      <div class="clearfix"></div>
+      <h1>Equivalent DFA</h1>
+      <div class="row">
+        <div class="col-lg">
+          <span id="current-dfa-status"></span>
+          <div id="current-dfa"></div>
+        </div>
+        <div id="step-div" class="col-lg"></div>
+      </div>
+
+      <h1>Minimized DFA</h1>
+      <span id="current-dfa-minimized-status"></span>
+      <div id="current-dfa-minimized"></div>
+
+      <footer class="footer mt-auto py-3">
+        <div class="container">
+          <span class="text-muted"
+            >Made with <i class="fas fa-heart"></i> by
+            <a href="https://www.youtube.com/c/SimplifiedLearner">Team 10</a>
+          </span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Font Awesome -->
+    <script
+      src="https://kit.fontawesome.com/17ac6b8a5c.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script
+      src="https://unpkg.com/viz.js@1.8.1/viz.js"
+      type="javascript/worker"
+    ></script>
+    <script src="https://unpkg.com/d3-graphviz@2.6.1/build/d3-graphviz.js"></script>
+
+    <!-- NFAtoDFA engine -->
+    <script src="NFAtoDFA-ENGINE.js"></script>
+
+    <!-- NFAtoDFA DOM -->
+    <script src="NFAtoDFA-DOM.js"></script>
+  </body>
+</html>
